@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vis-4Y-f1i" id="TbV-Mt-aPJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -33,7 +33,16 @@
                             <outlet property="delegate" destination="m4A-cC-h09" id="f20-pC-g18"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Notes" id="b2c-eN-xRm"/>
+                    <navigationItem key="navigationItem" title="Notes" id="b2c-eN-xRm">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="2NB-8p-C3T">
+                            <connections>
+                                <action selector="beginEditing:" destination="m4A-cC-h09" id="whp-Rj-Trc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="2NB-8p-C3T" id="9ki-6I-4Ia"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0P4-UG-Ybc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

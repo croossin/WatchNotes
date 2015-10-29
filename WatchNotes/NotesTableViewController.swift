@@ -13,12 +13,24 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     var notes :NSMutableArray = NSMutableArray()
     var fileCoordinator = NSFileCoordinator()
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
+    //When 'Edit' button is click in NavBar to rearrange table
+    @IBAction func beginEditing(sender: AnyObject) {
+        if(!self.editing){
+            editButton.title = "Done"
+        }else{
+            editButton.title = "Edit"
+        }
+        self.editing = !self.editing
+    }
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
 
         
-        // delete all existing notes 
+        // delete all existing notes
         deleteAllNotes()
         
         // populate the notes and update the tableView
@@ -151,6 +163,16 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true;
+    }
+    
+    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true}
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+        var itemToMove = notes[fromIndexPath.row]
+        notes.removeObjectAtIndex(fromIndexPath.row)
+        notes.insertObject(itemToMove, atIndex: toIndexPath.row)
+        updateNotes()
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
