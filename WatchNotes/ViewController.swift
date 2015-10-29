@@ -44,7 +44,7 @@ class ViewController: UIViewController,NSFilePresenter {
         
         let fileCoordinator = NSFileCoordinator()
         
-        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: nil, error: nil) { ( newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: [], error: nil) { ( newURL :NSURL) -> Void in
             
             self.notes = NSMutableArray() // writing an empty array
             
@@ -61,7 +61,7 @@ class ViewController: UIViewController,NSFilePresenter {
         let note = self.noteTextField?.text
         
         // get the notes array
-        fileCoordinator.coordinateReadingItemAtURL(presentedItemURL!, options: nil, error: nil) { (newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateReadingItemAtURL(presentedItemURL!, options: [], error: nil) { (newURL :NSURL) -> Void in
             
             let savedData = NSData(contentsOfURL: newURL)
             
@@ -77,7 +77,7 @@ class ViewController: UIViewController,NSFilePresenter {
         
         
         // write note into the notes array
-        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: nil, error: nil) { ( newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: [], error: nil) { ( newURL :NSURL) -> Void in
             
             self.notes?.addObject(note!)
             

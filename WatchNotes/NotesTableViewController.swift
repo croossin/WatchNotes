@@ -43,7 +43,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     private func populateNotes() {
         
         // get the notes array
-        fileCoordinator.coordinateReadingItemAtURL(presentedItemURL!, options: nil, error: nil) { (newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateReadingItemAtURL(presentedItemURL!, options: [], error: nil) { (newURL :NSURL) -> Void in
             
             let savedData = NSData(contentsOfURL: newURL)
             
@@ -52,7 +52,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
             }
             else {
                 
-                self.notes = NSKeyedUnarchiver.unarchiveObjectWithData(savedData!) as NSMutableArray
+                self.notes = NSKeyedUnarchiver.unarchiveObjectWithData(savedData!) as! NSMutableArray
             }
             
         }
@@ -61,7 +61,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     private func saveNote(note :String) {
         
         // write note into the notes array
-        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: nil, error: nil) { ( newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: [], error: nil) { ( newURL :NSURL) -> Void in
             
             self.notes.addObject(note)
             
@@ -74,7 +74,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     private func updateNotes() {
         
         // write note into the notes array
-        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: nil, error: nil) { ( newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: [], error: nil) { ( newURL :NSURL) -> Void in
             
             let saveData = NSKeyedArchiver.archivedDataWithRootObject(self.notes)
             let success = saveData.writeToURL(newURL, atomically: true)
@@ -84,7 +84,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     
     private func deleteAllNotes() {
         
-        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: nil, error: nil) { ( newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateWritingItemAtURL(presentedItemURL!, options: [], error: nil) { ( newURL :NSURL) -> Void in
             
             self.notes = NSMutableArray() // writing an empty array
             
@@ -142,7 +142,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
         
         let cell = tableView.dequeueReusableCellWithIdentifier("NoteCell", forIndexPath: indexPath) as UITableViewCell
         
-        var note = self.notes[indexPath.row] as String
+        var note = self.notes[indexPath.row] as! String
         
         cell.textLabel?.text = note
         
@@ -167,7 +167,7 @@ class NotesTableViewController: UITableViewController,UITextFieldDelegate,NSFile
     
     func textFieldDidEndEditing(textField: UITextField) {
     
-        saveNote(textField.text)
+        saveNote(textField.text!)
         
         // reload table 
         self.tableView.reloadData()

@@ -314,6 +314,8 @@
 		34E77AC21A211A150083241E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "AzamSharp Consulting LLC";
 				TargetAttributes = {

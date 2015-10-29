@@ -16,9 +16,9 @@ class InterfaceController: WKInterfaceController,NSFilePresenter {
     
     var notes :NSMutableArray?
     
-    override init(context: AnyObject?) {
+    override init() {
         // Initialize variables here.
-        super.init(context: context)
+        super.init()
         
         NSFileCoordinator.addFilePresenter(self)
         
@@ -45,7 +45,7 @@ class InterfaceController: WKInterfaceController,NSFilePresenter {
         let fileCoordinator = NSFileCoordinator()
         var note :String?
         
-        fileCoordinator.coordinateReadingItemAtURL(presentedItemURL!, options: nil, error: nil) { (newURL :NSURL!) -> Void in
+        fileCoordinator.coordinateReadingItemAtURL(presentedItemURL!, options: [], error: nil) { (newURL :NSURL) -> Void in
             
             let savedData = NSData(contentsOfURL: newURL)
             
@@ -58,9 +58,9 @@ class InterfaceController: WKInterfaceController,NSFilePresenter {
                 
                 self.tableView?.setNumberOfRows(self.notes!.count, withRowType: "NotesTableRowController")
                 
-                for (index,value) in enumerate(self.notes!) {
+                for (index,value) in (self.notes!).enumerate() {
                     
-                    let row = self.tableView?.rowControllerAtIndex(index) as NotesTableRowController
+                    let row = self.tableView?.rowControllerAtIndex(index) as! NotesTableRowController
                     
                     row.noteTitleLabel?.setText(value as? String)
                     
